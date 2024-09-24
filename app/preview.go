@@ -28,7 +28,7 @@ func getImgPreview(fp string, windowWidth int, windowHeight int) string {
 		utils.LogERROR(fmt.Sprintf("failed to decode image file for preview | %s", err))
 		return fmt.Sprintf("failed to open image file for preview | %s", err)
 	}
-	switch config.ClipseConfig.ImageDisplay {
+	switch config.ClipseConfig.ImageDisplay.Type {
 	case "sixel":
 		return getSixelString(img, windowWidth, windowHeight)
 	case "kitty":
@@ -96,8 +96,8 @@ func getKittyString(img image.Image, windowWidth int, windowHeight int) string {
 }
 
 func smartResize(img image.Image, windowWidth int, windowHeight int) image.Image {
-	maxWidth := windowWidth * config.ClipseConfig.ImageScaleX
-	maxHeight := windowHeight * config.ClipseConfig.ImageScaleY
+	maxWidth := windowWidth * config.ClipseConfig.ImageDisplay.ScaleX
+	maxHeight := windowHeight * config.ClipseConfig.ImageDisplay.ScaleY
 	imageWidth := img.Bounds().Dx()
 	imageHeight := img.Bounds().Dy()
 	if imageWidth/imageHeight > maxWidth/maxHeight {
