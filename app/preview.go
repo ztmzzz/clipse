@@ -3,18 +3,18 @@ package app
 import (
 	"bytes"
 	"fmt"
-	"github.com/BourgeoisBear/rasterm"
-	"github.com/savedra1/clipse/config"
 	"image"
 	"image/color/palette"
 	"image/draw"
 	"os"
 	"strings"
 
+	"github.com/BourgeoisBear/rasterm"
 	"github.com/charmbracelet/bubbles/viewport"
 	"github.com/muesli/termenv"
 	"github.com/nfnt/resize"
 
+	"github.com/savedra1/clipse/config"
 	"github.com/savedra1/clipse/utils"
 )
 
@@ -102,9 +102,8 @@ func smartResize(img image.Image, windowWidth int, windowHeight int) image.Image
 	imageHeight := img.Bounds().Dy()
 	if imageWidth/imageHeight > maxWidth/maxHeight {
 		return resize.Resize(uint(maxWidth), 0, img, resize.Lanczos3)
-	} else {
-		return resize.Resize(0, uint(maxHeight), img, resize.Lanczos3)
 	}
+	return resize.Resize(0, uint(maxHeight), img, resize.Lanczos3)
 }
 
 func getDecodedImg(fp string) (image.Image, error) {
