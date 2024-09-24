@@ -21,14 +21,11 @@ import (
 	the Model state.
 */
 
-var windowWidth = 80 // default to use when rendering image preview (upddated on tea.WindowSizeMsg)
-
 func (m Model) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 	var cmds []tea.Cmd
 
 	switch msg := msg.(type) {
 	case tea.WindowSizeMsg:
-		windowWidth = msg.Width
 		h, v := appStyle.GetFrameSize()
 		m.list.SetSize(msg.Width-h, msg.Height-v)
 		m.confirmationList.SetSize(msg.Width-h, msg.Height-v)
