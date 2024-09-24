@@ -1,6 +1,7 @@
 name: Test go build
 
 on:
+  workflow_dispatch:
   pull_request:
     branches: 
       - main
